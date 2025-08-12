@@ -1,7 +1,6 @@
 import { useCart } from "../context/CartContext";
 import "../styles/cartPage.css";
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate, Link } from "react-router-dom";
 import ProductDetails from "../pages/ProductDetails";
 
 export default function CartPage() {
@@ -18,9 +17,9 @@ export default function CartPage() {
       <div className="text-center" style={{ marginTop: "5rem" }}>
         <i className="bi bi-cart-x fs-1 text-muted"></i>
         <p className="mt-3">Tu carrito está vacío.</p>
-        <a href="/" className="btn btn-danger mt-2">
+        <Link to="/" className="btn btn-danger mt-2">
           Volver a la tienda
-        </a>
+        </Link>
       </div>
     );
   }
