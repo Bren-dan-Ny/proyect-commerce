@@ -11,9 +11,9 @@ export default function FavoritesPage() {
         <p className="text-muted text-center">
           Cuando agregues productos, aparecerán aquí para que los veas rápido.
         </p>
-        <a href="/" className="btn btn-danger mt-2">
+        <Link href="/" className="btn btn-danger mt-2">
           Volver a la tienda
-        </a>
+        </Link>
       </div>
     );
   }
