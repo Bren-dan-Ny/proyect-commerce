@@ -26,9 +26,18 @@ export default function CartPage() {
 
   return (
     <div
-      className="container "
+      className="container"
       style={{ marginTop: "5rem", marginBottom: "5rem" }}
     >
+      <nav aria-label="breadcrumb" className="mt-4 mb-4">
+        <ol className="breadcrumb">
+          <li className="breadcrumb-item">
+            <Link to="/" className="text-dark">
+              Inicio
+            </Link>
+          </li>
+        </ol>
+      </nav>
       <h2 className="mb-4">Carrito de compras</h2>
 
       {/* Versión Desktop (md y arriba) */}
