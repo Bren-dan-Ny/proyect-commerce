@@ -1,0 +1,21 @@
+.row.g-3 {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .row.g-3 > div {
+    flex: 0 0 50%; /* 2 por fila mínimo */
+  }
+  
+  @media (min-width: 768px) {
+    .row.g-3 > div {
+      flex: 0 0 33.333%; /* 3 por fila */
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .row.g-3 > div {
+      flex: 0 0 25%; /* 4 por fila */
+    }
+  }
+  

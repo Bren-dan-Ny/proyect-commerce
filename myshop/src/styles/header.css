@@ -1,0 +1,36 @@
+/* header.css */
+
+header {
+  position: relative;
+  padding: 0 1rem;
+  z-index: 10; /* para que el logo esté por encima si hace falta */
+}
+
+/* Logo centrado */
+.logo-center img {
+  max-height: 50px;
+  max-width: 150px;
+  object-fit: contain;
+}
+
+/* Para que los contenedores lateral izquierdo y derecho no colapsen */
+header > div:first-child,
+header > div:last-child {
+  flex-shrink: 0;
+}
+
+/* Espaciado y alineación lateral */
+header > div:first-child {
+  gap: 0.5rem;
+}
+
+@media (max-width: 576px) {
+  .logo-center img {
+    max-height: 40px;
+  }
+  
+  /* Opcional: ajustar botones y texto */
+  header > div:first-child a {
+    font-size: 0.9rem;
+  }
+}

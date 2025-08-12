@@ -1,0 +1,17 @@
+.dropdown-items {
+    background-color: #f8f9fa;
+
+    margin-left: 1.5rem;
+  }
+  
+  .dropdown-item {
+    display: block;
+    padding: 0.3rem 0;
+    margin-bottom: 0.25rem;
+    color: #464646;
+    text-decoration: none;
+  }
+  
+  .dropdown-item:hover {
+    text-decoration: underline;
+  }
