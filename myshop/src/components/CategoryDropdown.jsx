@@ -1,5 +1,4 @@
 // components/CategoriaDropdown.jsx
-import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "../styles/categorydropdown.css";
 
@@ -10,11 +9,12 @@ export default function CategoriaDropdown({
   sidebarOpen,
   isOpen,
   onToggle,
+  onItemClick,
 }) {
   return (
     <div className="custom-dropdown border-bottom p-0">
       <button
-        className="btn w-100 p-2 d-flex align-items-center justify-content-between "
+        className="btn w-100 p-2 d-flex align-items-center justify-content-between"
         onClick={onToggle}
       >
         <div className="d-flex py-2 align-items-center">
@@ -35,6 +35,7 @@ export default function CategoriaDropdown({
               to={`/category/${item.value}`}
               className="dropdown-item"
               key={idx}
+              onClick={onItemClick}
             >
               {item.label}
             </NavLink>

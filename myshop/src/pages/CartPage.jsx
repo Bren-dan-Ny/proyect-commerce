@@ -1,19 +1,24 @@
 import { useCart } from "../context/CartContext";
+import { useState } from "react";
 import "../styles/cartPage.css";
 import { useNavigate } from "react-router-dom";
-
-import ProductDetails from "../pages/ProductDetails";
 
 export default function CartPage() {
   const { cartItems, removeFromCart, clearCart, updateQuantity } = useCart();
   const navigate = useNavigate();
+  const [showModal, setShowModal] = useState(false);
 
   const totalPrice = cartItems.reduce((sum, item) => {
     const discountValue = item.price * (item.discountPercentage / 100);
     return sum + (item.price - discountValue) * item.quantity;
   }, 0);
 
-  if (cartItems.length === 0) {
+  const handleCheckout = () => {
+    setShowModal(true);
+    clearCart();
+  };
+
+  if (cartItems.length === 0 && !showModal) {
     return (
       <div className="text-center" style={{ marginTop: "5rem" }}>
         <i className="bi bi-cart-x fs-1 text-muted"></i>
@@ -218,7 +223,6 @@ export default function CartPage() {
         })}
       </div>
 
-      {/* Resumen (compartido para ambas versiones) */}
       <div className="row" style={{ marginTop: "5rem", marginBottom: "5rem" }}>
         <div className="col-md-4 offset-md-8">
           <div className="card border-0 shadow-sm">
@@ -232,7 +236,10 @@ export default function CartPage() {
                 <span>S/.{totalPrice.toFixed(2)}</span>
               </div>
               <div className="d-grid gap-2">
-                <button className="btn btn-danger py-2">
+                <button
+                  className="btn btn-danger py-2"
+                  onClick={handleCheckout}
+                >
                   <i className="bi bi-credit-card me-2"></i>Finalizar compra
                 </button>
                 <button
@@ -246,6 +253,33 @@ export default function CartPage() {
           </div>
         </div>
       </div>
+
+      {showModal && (
+        <div
+          className="custom-modal-overlay"
+          onClick={() => setShowModal(false)}
+        >
+          <div
+            className="custom-modal-content text-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h5 className="mb-3">¡Compra exitosa!</h5>
+            <i className="bi bi-check-circle-fill text-success fs-1"></i>
+            <p className="mt-3">
+              Gracias por tu compra. Te enviaremos un correo con los detalles.
+            </p>
+            <button
+              className="btn btn-danger mt-3"
+              onClick={() => {
+                setShowModal(false);
+                navigate("/");
+              }}
+            >
+              Volver al inicio
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

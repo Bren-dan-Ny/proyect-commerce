@@ -10,7 +10,7 @@ export const getProducts = async () => {
     throw error;
   }
 };
-// {llamada a categorias}
+// {categorias}
 export const getProductsByCategory = async (category) => {
   try {
     const response = await fetch(

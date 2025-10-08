@@ -39,7 +39,7 @@ export default function ProductDetail() {
 
   const handleAddToCart = () => {
     addToCart({ ...product, quantity });
-    navigate("/productos"); // Ajusta esta ruta a la real de tu página productos
+    navigate("/productos");
   };
   return (
     <>
@@ -181,7 +181,9 @@ export default function ProductDetail() {
                     className={`btn btn-add-to-cart ${
                       isOutOfStock ? "btn-secondary" : "btn-danger"
                     }`}
-                    onClick={() => !isOutOfStock && addToCart(product)}
+                    onClick={() =>
+                      !isOutOfStock && addToCart({ ...product, quantity })
+                    }
                     disabled={isOutOfStock}
                   >
                     {isOutOfStock ? (

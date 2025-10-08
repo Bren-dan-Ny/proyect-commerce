@@ -5,7 +5,7 @@ import "../styles/sidebar.css";
 import logotipo from "../assets/logotipo.png";
 
 export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
-  const [openIndex, setOpenIndex] = useState(null); // corregido
+  const [openIndex, setOpenIndex] = useState(null);
 
   const categorias = [
     {
@@ -114,6 +114,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
                   sidebarOpen={sidebarOpen}
                   isOpen={openIndex === idx}
                   onToggle={() => setOpenIndex(openIndex === idx ? null : idx)}
+                  onItemClick={() => setSidebarOpen(false)}
                 />
               ))}
             </nav>

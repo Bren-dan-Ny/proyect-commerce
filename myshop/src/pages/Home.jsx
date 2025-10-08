@@ -121,7 +121,7 @@ export default function Home({ products }) {
 
       <div
         className="container"
-        style={{ marginTop: "5rem", marginBottom: "5rem" }}
+        style={{ marginTop: "3rem", marginBottom: "3  rem" }}
       >
         <div className="d-flex align-items-center mb-4 px-2">
           <div

@@ -18,17 +18,24 @@ export function CartProvider({ children }) {
     localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
 
+  // Agregar producto al carrito
   const addToCart = (product) => {
     setCartItems((prev) => {
       const exists = prev.find((item) => item.id === product.id);
       if (exists) {
         return prev.map((item) =>
           item.id === product.id
-            ? { ...item, quantity: Math.min(item.quantity + 1, 10) } // Limita a 10
+            ? {
+                ...item,
+                quantity: Math.min(item.quantity + product.quantity, 10),
+              }
             : item
         );
       }
-      return [...prev, { ...product, quantity: 1 }];
+      return [
+        ...prev,
+        { ...product, quantity: Math.min(product.quantity || 1, 10) },
+      ];
     });
   };
 

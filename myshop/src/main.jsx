@@ -9,7 +9,7 @@ import "./index.css";
 import { FavoritesProvider } from "./context/FavoriteContext.jsx";
 
 createRoot(document.getElementById("root")).render(
-  <BrowserRouter>
+  <BrowserRouter basename="/proyect-commerce">
     <FavoritesProvider>
       <CartProvider>
         <App />
