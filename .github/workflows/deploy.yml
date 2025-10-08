@@ -14,6 +14,11 @@ concurrency:
   group: "pages"
   cancel-in-progress: true
 
+# 👇 AGREGAR ESTO - indica que tu proyecto está en myshop/
+defaults:
+  run:
+    working-directory: myshop
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -26,9 +31,12 @@ jobs:
         with:
           node-version: 20
           cache: "npm"
+          # 👇 AGREGAR esto también
+          cache-dependency-path: myshop/package-lock.json
 
       - name: Install dependencies
         run: npm ci
+        # 👇 El working-directory aplica automáticamente aquí
 
       - name: Build Vite project
         run: npm run build
@@ -39,7 +47,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          # 👇 AGREGAR myshop/ aquí también
+          path: myshop/dist
 
   deploy:
     environment:
