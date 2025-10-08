@@ -1,7 +1,8 @@
 import { useCart } from "../context/CartContext";
 import { useState } from "react";
 import "../styles/cartPage.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import ProductDetails from "../pages/ProductDetails";
 
 export default function CartPage() {
   const { cartItems, removeFromCart, clearCart, updateQuantity } = useCart();
@@ -23,18 +24,27 @@ export default function CartPage() {
       <div className="text-center" style={{ marginTop: "5rem" }}>
         <i className="bi bi-cart-x fs-1 text-muted"></i>
         <p className="mt-3">Tu carrito está vacío.</p>
-        <a href="/" className="btn btn-danger mt-2">
+        <Link to="/" className="btn btn-danger mt-2">
           Volver a la tienda
-        </a>
+        </Link>
       </div>
     );
   }
 
   return (
     <div
-      className="container "
+      className="container"
       style={{ marginTop: "5rem", marginBottom: "5rem" }}
     >
+      <nav aria-label="breadcrumb" className="mt-4 mb-4">
+        <ol className="breadcrumb">
+          <li className="breadcrumb-item">
+            <Link to="/" className="text-dark">
+              Inicio
+            </Link>
+          </li>
+        </ol>
+      </nav>
       <h2 className="mb-4">Carrito de compras</h2>
 
       {/* Versión Desktop (md y arriba) */}
