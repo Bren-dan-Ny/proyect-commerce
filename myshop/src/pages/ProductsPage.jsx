@@ -66,7 +66,7 @@ export default function ProductsPage({ selectedCategory }) {
                 product={p}
                 onFavorite={(prod) => console.log("fav", prod.id)}
                 onAddToCart={handleAddToCart}
-                onView={() => console.log("view", p.id)} // función para el click "ver"
+                onView={() => console.log("view", p.id)} // función para el click "ver", si se necesita
               />
             </div>
           ))}
