@@ -1,8 +1,9 @@
-import { useFavorites } from "../context/FavoriteContext";
+import { useFavoritesStore } from "../stores/useFavoritesStore";
 import ProductCard from "../components/ProductCard";
 import { Link } from "react-router-dom";
+
 export default function FavoritesPage() {
-  const { favorites, clearFavorites } = useFavorites();
+  const { favorites, clearFavorites } = useFavoritesStore();
 
   if (favorites.length === 0) {
     return (

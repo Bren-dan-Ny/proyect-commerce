@@ -1,46 +1,24 @@
-import { getProducts, getProductsByCategory } from "../services/productsApi";
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
+import { useProductStore } from "../stores/useProductStore";
 import ProductCard from "../components/ProductCard";
-import { Link } from "react-router-dom";
 import "../styles/productsPage.css";
 
-export default function ProductsPage({ selectedCategory }) {
+export default function ProductsPage() {
   const { category } = useParams();
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [cart, setCart] = useState([]);
-
-  const handleAddToCart = (product) => {
-    setCart((prev) => [...prev, product]);
-  };
+  const { products, loading, error, fetchProducts } = useProductStore();
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        const data = category
-          ? await getProductsByCategory(category)
-          : await getProducts();
-        setProducts(data.products || []);
-      } catch (error) {
-        setError(error.message || "Error al cargar productos");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
+    fetchProducts(category);
   }, [category]);
 
-  if (loading) return <p>Cargando producto...</p>;
-  if (error) return <p>Error: {error}</p>;
-  if (products.length === 0) return <p>No hay productos</p>;
+  if (loading) return <p className="container my-5">Cargando productos...</p>;
+  if (error) return <p className="container my-5">Error: {error}</p>;
+  if (products.length === 0)
+    return <p className="container my-5">No hay productos</p>;
+
   return (
     <>
-      {" "}
       <nav aria-label="breadcrumb" className="container mt-5">
         <ol className="breadcrumb">
           <li className="breadcrumb-item">
@@ -55,19 +33,15 @@ export default function ProductsPage({ selectedCategory }) {
           )}
         </ol>
       </nav>
+
       <div
         className="container my-4"
         style={{ minHeight: "100vh", paddingBottom: "5rem" }}
       >
         <div className="row g-3">
           {products.map((p) => (
-            <div key={p.id} className="col-6 col-sm-6 col-md-4 col-lg-3 ">
-              <ProductCard
-                product={p}
-                onFavorite={(prod) => console.log("fav", prod.id)}
-                onAddToCart={handleAddToCart}
-                onView={() => console.log("view", p.id)} // función para el click "ver"
-              />
+            <div key={p.id} className="col-6 col-sm-6 col-md-4 col-lg-3">
+              <ProductCard product={p} />
             </div>
           ))}
         </div>

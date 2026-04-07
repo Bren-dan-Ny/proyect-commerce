@@ -1,8 +1,6 @@
 import { useState } from "react";
 import CategoriaDropdown from "../components/CategoryDropdown";
-import { NavLink } from "react-router-dom";
 import "../styles/sidebar.css";
-import logotipo from "../assets/logotipo.png";
 
 export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
   const [openIndex, setOpenIndex] = useState(null); // corregido
@@ -88,18 +86,12 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
           className="sidebar-header d-flex align-items-center  border-bottom"
           style={{ height: "80px" }}
         >
-          {/* Botón toggle */}
           <button
             className="btn btn-outline-secondary me-2"
             onClick={() => setSidebarOpen(!sidebarOpen)}
           >
             <i className="bi bi-list"></i>
           </button>
-
-          {/* Logo */}
-          <NavLink className="navbar-brand m-0" to="/">
-            <img src={logotipo} alt="Logo" height="50" />
-          </NavLink>
         </div>
 
         {sidebarOpen && (
@@ -114,6 +106,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
                   sidebarOpen={sidebarOpen}
                   isOpen={openIndex === idx}
                   onToggle={() => setOpenIndex(openIndex === idx ? null : idx)}
+                  onSelectItem={() => setSidebarOpen(false)}
                 />
               ))}
             </nav>

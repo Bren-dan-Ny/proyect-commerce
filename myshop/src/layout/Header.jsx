@@ -1,13 +1,12 @@
-// Header.jsx
 import logotipo from "../assets/logotipo.png";
 import { NavLink } from "react-router-dom";
-import { useCart } from "../context/CartContext";
-import { useFavorites } from "../context/FavoriteContext";
+import { useCartStore } from "../stores/useCartStore";
+import { useFavoritesStore } from "../stores/useFavoritesStore";
 import "../styles/header.css";
 
 export default function Header({ sidebarOpen, setSidebarOpen }) {
-  const { cartItems } = useCart();
-  const { favorites } = useFavorites();
+  const cartItems = useCartStore((state) => state.cartItems);
+  const favorites = useFavoritesStore((state) => state.favorites);
 
   return (
     <header className="bg-light d-flex align-items-center p-3 position-relative justify-content-center">
@@ -19,13 +18,8 @@ export default function Header({ sidebarOpen, setSidebarOpen }) {
         >
           <i className="bi bi-list"></i>
         </button>
-
-        <NavLink to="/" className="text-decoration-none text-dark fw-semibold">
-          Menú
-        </NavLink>
       </div>
 
-      {/* Logo centrado absolute */}
       <NavLink
         to="/"
         className="position-absolute top-50 start-50 translate-middle"
@@ -34,7 +28,6 @@ export default function Header({ sidebarOpen, setSidebarOpen }) {
         <img src={logotipo} alt="Logo" style={{ maxHeight: "50px" }} />
       </NavLink>
 
-      {/* Contenedor derecho: íconos */}
       <div className="ms-auto d-flex align-items-center gap-4">
         <NavLink
           to="/favorites"

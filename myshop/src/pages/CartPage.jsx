@@ -1,11 +1,14 @@
-import { useCart } from "../context/CartContext";
+import { useCartStore } from "../stores/useCartStore";
+import { useState } from "react";
 import "../styles/cartPage.css";
 import { useNavigate, Link } from "react-router-dom";
-import ProductDetails from "../pages/ProductDetails";
+import CheckoutModal from "../components/checkoutModal";
 
 export default function CartPage() {
-  const { cartItems, removeFromCart, clearCart, updateQuantity } = useCart();
+  const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
+  const { cartItems, removeFromCart, clearCart, updateQuantity } =
+    useCartStore();
 
   const totalPrice = cartItems.reduce((sum, item) => {
     const discountValue = item.price * (item.discountPercentage / 100);
@@ -79,6 +82,7 @@ export default function CartPage() {
                       width: "100px",
                       height: "100px",
                       objectFit: "cover",
+                      cursor: "pointer",
                     }}
                     onClick={() => navigate(`/product/${item.id}`)}
                   />
@@ -240,7 +244,10 @@ export default function CartPage() {
                 <span>S/.{totalPrice.toFixed(2)}</span>
               </div>
               <div className="d-grid gap-2">
-                <button className="btn btn-danger py-2">
+                <button
+                  className="btn btn-danger py-2"
+                  onClick={() => setShowModal(true)}
+                >
                   <i className="bi bi-credit-card me-2"></i>Finalizar compra
                 </button>
                 <button
@@ -254,6 +261,7 @@ export default function CartPage() {
           </div>
         </div>
       </div>
+      <CheckoutModal show={showModal} onClose={() => setShowModal(false)} />
     </div>
   );
 }

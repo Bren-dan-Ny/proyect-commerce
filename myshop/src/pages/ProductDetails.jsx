@@ -1,14 +1,13 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
-import { useCart } from "../context/CartContext";
+import { useCartStore } from "../stores/useCartStore";
 import "../styles/productDetails.css";
 
 export default function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { addToCart } = useCart();
+  const addToCart = useCartStore((state) => state.addToCart);
   const [product, setProduct] = useState(null);
   const [mainImage, setMainImage] = useState(null);
   const [quantity, setQuantity] = useState(1);
@@ -39,7 +38,6 @@ export default function ProductDetail() {
 
   const handleAddToCart = () => {
     addToCart({ ...product, quantity });
-    navigate("/productos"); // Ajusta esta ruta a la real de tu página productos
   };
   return (
     <>
@@ -181,7 +179,7 @@ export default function ProductDetail() {
                     className={`btn btn-add-to-cart ${
                       isOutOfStock ? "btn-secondary" : "btn-danger"
                     }`}
-                    onClick={() => !isOutOfStock && addToCart(product)}
+                    onClick={handleAddToCart}
                     disabled={isOutOfStock}
                   >
                     {isOutOfStock ? (
