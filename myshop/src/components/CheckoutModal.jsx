@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useCartStore } from "../stores/useCartStore";
 import { useNavigate } from "react-router-dom";
 
+/*modal de procesamiento de pagos*/
 function CheckoutModal({ show, onClose }) {
   const [step, setStep] = useState("processing"); // "processing" | "success"
   const clearCart = useCartStore((state) => state.clearCart);
