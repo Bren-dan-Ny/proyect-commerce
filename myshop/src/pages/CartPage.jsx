@@ -2,7 +2,7 @@ import { useCartStore } from "../stores/useCartStore";
 import { useState } from "react";
 import "../styles/cartPage.css";
 import { useNavigate, Link } from "react-router-dom";
-import CheckoutModal from "../components/checkoutModal";
+import CheckoutModal from "../components/CheckoutModal";
 
 export default function CartPage() {
   const [showModal, setShowModal] = useState(false);
