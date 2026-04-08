@@ -15,7 +15,7 @@ export const useCartStore = create(
                 ? {
                     ...item,
                     quantity: Math.min(
-                      item.quantity + product.quantity,
+                      item.quantity + (product.quantity ?? 1),
                       product.stock,
                     ),
                   }
@@ -26,7 +26,7 @@ export const useCartStore = create(
           set((state) => ({
             cartItems: [
               ...state.cartItems,
-              { ...product, quantity: product.quantity },
+              { ...product, quantity: product.quantity ?? 1 },
             ],
           }));
         }
