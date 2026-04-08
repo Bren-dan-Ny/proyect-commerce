@@ -27,6 +27,7 @@ export default function CartPage() {
     );
   }
 
+  //pagina del carrito
   return (
     <div
       className="container"
