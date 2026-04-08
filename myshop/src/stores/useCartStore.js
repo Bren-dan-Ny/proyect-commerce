@@ -31,7 +31,7 @@ export const useCartStore = create(
           }));
         }
       },
-
+      // fix: NaN corregido
       removeFromCart: (id) =>
         set((state) => ({
           cartItems: state.cartItems.filter((item) => item.id !== id),
